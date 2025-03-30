@@ -19,6 +19,7 @@ Required Python libraries (see Dependencies (#dependencies) below)
 
 # Installation
 1. Clone the Repository:
+ 
 bash```
 git clone https://github.com/Titan-Spy/AI-Virtual-On-Screen-Keyboard-Using-Computer-Vision.git
 cd AI-Virtual-On-Screen-Keyboard-Using-Computer-Vision
@@ -26,6 +27,7 @@ cd AI-Virtual-On-Screen-Keyboard-Using-Computer-Vision
 
 2. Install Dependencies:
 Install the required Python packages using pip:
+
 bash```
 pip install opencv-python cvzone pynput pygame numpy
 ```
@@ -40,6 +42,7 @@ pip install opencv-python cvzone pynput pygame numpy
 
 # Usage
 1. Run the Script:
+
 bash```
 python main.py
 ```
