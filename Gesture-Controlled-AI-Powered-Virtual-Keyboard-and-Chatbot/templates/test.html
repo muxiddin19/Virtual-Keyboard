@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Virtual Keyboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        #video-feed {
+            max-width: 100%;
+            border: 2px solid #333;
+        }
+        #typed-text {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gesture-Controlled Virtual Keyboard</h1>
+        <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Video Feed">
+        <div id="typed-text">Text will appear here</div>
+        
+        <div id="chat-section" style="margin-top: 20px;">
+            <h2>AI Chat</h2>
+            <textarea id="chat-input" rows="3" cols="50" placeholder="Type your message..."></textarea>
+            <button onclick="sendMessage()">Send</button>
+            <div id="chat-response"></div>
+        </div>
+    </div>
+
+    <script>
+        // Periodically update typed text
+        function updateTypedText() {
+            fetch('/get_text')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('typed-text').textContent = data.text;
+                });
+        }
+
+        // Chat functionality
+        function sendMessage() {
+            const input = document.getElementById('chat-input').value;
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({input: input})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('chat-response').textContent = data.response;
+            });
+        }
+
+        // Update text every second
+        setInterval(updateTypedText, 1000);
+    </script>
+</body>
+</html>
